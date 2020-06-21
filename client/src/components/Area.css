@@ -1,0 +1,9 @@
+.area{
+    width: 303px;
+    height: 303px;
+    border:1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}

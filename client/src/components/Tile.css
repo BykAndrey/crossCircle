@@ -1,0 +1,47 @@
+.tile {
+    width: 100px;
+    padding-top: 100px;
+    border:1px solid black;
+    margin: -1px;
+    display: flex;
+    position: relative;
+}
+.tile:after,
+.tile:before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    transition: 0.3s;
+}
+.tile--cross:before {
+    transform: rotate(45deg);
+    width: 70%;
+    
+}
+.tile--cross:after {
+    transform: rotate(-45deg);
+    width: 70%;
+}
+
+
+.tile--circle:before {
+    transform: rotate(45deg);
+    width: 70%;
+    height: 70%;
+    border-radius: 100%;
+    
+}
+.tile--circle:after {
+    transform: rotate(-90deg);
+    width: 70%;
+    height: 70%;
+    border-radius: 100%;
+}
