@@ -66,7 +66,7 @@ export default props => {
             resetTilesType();
         }
 
-    }, [tilesType]);
+    }, [tilesType, onWin, onEnd, schema]);
 
     const tilesList = getTileList(9);
     return (<div className="area">

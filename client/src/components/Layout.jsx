@@ -1,30 +1,48 @@
 import React from 'react';
 import Area from './Area';
-import { useState } from 'react';
+import AppContext from './../AppContext';
+import SocketServerApi  from './../Socket/socket-api';
+export default class extends React.Component {
+    static contextType = AppContext;
+    constructor(props) {
+        super(props);
+        this.state = {
+            score: {
+                circle: 0,
+                cross: 0
+            },
+            areaKey: '1'
+        }
+    }
 
-export default props => {
-    const [ score, setScore ]= useState({
-        circle: 0,
-        cross: 0
-    }); 
-    const [ areaKey, setAreaKey ]  = useState('1');
-
-    const onWin = (whoWin) => {
-        console.log('onWin')
-        setScore({
-            ...score,
-            [whoWin]: score[whoWin]+ 1
+    onWin(whoWin) {
+        this.setState({
+            score: {
+                ...this.state.score,
+                [whoWin]: this.state.score[whoWin] + 1
+            }
         })
     }
-    const onEnd = () => {setAreaKey((Math.random() * 10).toString());}
-    const onReset = () => {setAreaKey((Math.random() * 10).toString());}
+    onEnd () {
+        this.setState({
+            areaKey: (Math.random() * 10).toString()
+        })
+    };
+    onReset() {
+        this.setState({
+            areaKey: (Math.random() * 10).toString()
+        })
+    };
+    render() {
+        return (<div >
+            <h3>User ID: {this.context.userID}</h3>
+            <div>Cross: {this.state.score.cross} Circle: {this.state.score.circle}</div>
+            <button onClick={this.onReset}>Reset</button>
+            <Area
+                key={this.state.areaKey}
+                onWin={this.onWin}
+                onEnd={this.onEnd} />
+        </div>)
+    }
 
-    return (<div >
-        <div>Cross: {score.cross} Circle: {score.circle}</div>
-        <button onClick={onReset}>Reset</button>
-        <Area 
-            key={areaKey}
-            onWin={onWin}
-            onEnd={onEnd}/>
-    </div>)
 }
